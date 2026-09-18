@@ -1,0 +1,37 @@
+name: Generate resource index
+
+on:
+  push:
+    branches:
+      - main
+    paths:
+      - "pages/**/*.html"
+      - "scripts/generate-index.mjs"
+
+permissions:
+  contents: write
+
+jobs:
+  generate-index:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Generate index
+        run: node scripts/generate-index.mjs
+
+      - name: Commit updated index
+        run: |
+          if git diff --quiet index.html; then
+            echo "Index is already up to date."
+            exit 0
+          fi
+
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+
+          git add index.html
+          git commit -m "Generate resource index"
+          git push
