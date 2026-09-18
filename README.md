@@ -1,6 +1,6 @@
 [![Generate resource index](https://github.com/lantiguav/resources-template/actions/workflows/generate-index.yml/badge.svg)](https://github.com/lantiguav/resources-template/actions/workflows/generate-index.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
-[![Use this template](https://img.shields.io/badge/use_this-template-2ea44f?logo=github)](https://github.com/OWNER/REPOSITORY/generate)
+[![Use this template](https://img.shields.io/badge/use_this-template-2ea44f?logo=github)](https://github.com/lantiguav/resources-template/generate)
 
 # Static Resource Publisher
 
