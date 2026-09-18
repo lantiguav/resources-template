@@ -2,6 +2,7 @@ import { readdir, readFile, writeFile } from "node:fs/promises";
 import { basename, join } from "node:path";
 
 const pagesDirectory = "pages";
+const indexPath = join(pagesDirectory, "index.html");
 
 const escapeHtml = (value) =>
   value
@@ -11,7 +12,7 @@ const escapeHtml = (value) =>
     .replaceAll('"', "&quot;");
 
 const files = (await readdir(pagesDirectory))
-  .filter((file) => file.endsWith(".html"))
+  .filter((file) => file.endsWith(".html") && file !== "index.html")
   .sort();
 
 const resources = await Promise.all(
@@ -90,10 +91,14 @@ const indexHtml = `<!doctype html>
         background: white;
         border: 1px solid #ddd;
         border-radius: 12px;
+        transition:
+          border-color 150ms ease,
+          transform 150ms ease;
       }
 
       a:hover {
         border-color: #0084d1;
+        transform: translateY(-2px);
       }
     </style>
   </head>
@@ -104,13 +109,18 @@ const indexHtml = `<!doctype html>
       <p>Herramientas y recursos de marketing para tu negocio.</p>
 
       <ul>
-        ${resourceCards || "<li>No hay recursos publicados todavía.</li>"}
+        ${
+          resourceCards ||
+          "<li>No hay recursos publicados todavía.</li>"
+        }
       </ul>
     </main>
   </body>
 </html>
 `;
 
-await writeFile("index.html", indexHtml);
+await writeFile(indexPath, indexHtml);
 
-console.log(`Generated index.html with ${resources.length} resources.`);
+console.log(
+  `Generated ${indexPath} with ${resources.length} resources.`,
+);
