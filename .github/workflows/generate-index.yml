@@ -6,9 +6,9 @@ on:
       - main
     paths:
       - "pages/**/*.html"
+      - "!pages/index.html"
       - "scripts/generate-index.mjs"
 
-  # Adds the "Run workflow" button in GitHub Actions.
   workflow_dispatch:
 
 permissions:
@@ -27,7 +27,7 @@ jobs:
 
       - name: Commit updated index
         run: |
-          git add index.html
+          git add pages/index.html
 
           if git diff --cached --quiet; then
             echo "Index is already up to date."
