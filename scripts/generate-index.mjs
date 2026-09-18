@@ -54,7 +54,7 @@ const indexHtml = `<!doctype html>
       name="viewport"
       content="width=device-width, initial-scale=1.0"
     >
-    <title>Recursos | Lina Rodríguez Marketing</title>
+    <title>Resources</title>
 
     <style>
       :root {
@@ -105,13 +105,13 @@ const indexHtml = `<!doctype html>
 
   <body>
     <main>
-      <h1>Recursos</h1>
-      <p>Herramientas y recursos de marketing para tu negocio.</p>
+      <h1>Resources</h1>
+      <p>Browse available resources.</p>
 
       <ul>
         ${
           resourceCards ||
-          "<li>No hay recursos publicados todavía.</li>"
+          "<li>No resources have been published yet.</li>"
         }
       </ul>
     </main>
