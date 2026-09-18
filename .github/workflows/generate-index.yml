@@ -8,6 +8,9 @@ on:
       - "pages/**/*.html"
       - "scripts/generate-index.mjs"
 
+  # Adds the "Run workflow" button in GitHub Actions.
+  workflow_dispatch:
+
 permissions:
   contents: write
 
@@ -17,14 +20,16 @@ jobs:
 
     steps:
       - name: Check out repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v5
 
       - name: Generate index
         run: node scripts/generate-index.mjs
 
       - name: Commit updated index
         run: |
-          if git diff --quiet index.html; then
+          git add index.html
+
+          if git diff --cached --quiet; then
             echo "Index is already up to date."
             exit 0
           fi
@@ -32,6 +37,5 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
 
-          git add index.html
           git commit -m "Generate resource index"
           git push
